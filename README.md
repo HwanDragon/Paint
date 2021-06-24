@@ -9,5 +9,5 @@
 #
 This is my first project in Javascript.
 
-There is a plan to add a fill color. 
+There is a plan to add a fill color function like aintbrush in Window. 
 
