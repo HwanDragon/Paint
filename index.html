@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta chatset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="style.css">
+        
+        <title>Paint</title>
+    </head>
+    <body>
+        
+        <header>
+            <div class="menus" id="menu_area">
+                <div class="menu" id="canvas_size_control_area">
+                    width : <input type="number" id="canvas_width" min='1' step='1' value='700'><br>
+                    height : <input type="number" id="canvas_height" min='1' step='1' value='700'><br>
+                    <input type="button" id="resizeButton" value="resize">
+                </div>
+                <div class="menu" id="file_area">
+                    <input type="file" id="loadImage" value="load">
+                    <input type="image" id="saveButton" src="./image/save.png" onmousedown="this.src='./image/save_selected.png'" onmouseup="this.src='./image/save.png'" width="30" height="30">
+                </div>
+                <div class="menu" id="clip_board_area"></div>
+                <div class="menu" id="image_area"></div>
+                <div class="menu" id="tool_area">
+                    <input type="image" id="pen" src="./image/pen.png" onmousedown="this.src='./image/pen_selected.png'" onmouseup="this.src='./image/pen.png'" width="30" height="30">
+                    <input type="image" id="pipette" src="./image/pipette.png" onmousedown="this.src='./image/pipette_selected.png'" onmouseup="this.src='./image/pipette.png'" width="30" height="30">
+                    <input type="image" id="eraserCanvas" src="./image/erazer.png" onmousedown="this.src='./image/erazer_selected.png'" onmouseup="this.src='./image/erazer.png'" width="30" height="30">
+                </div>
+                <div class="menu" id="brash_area"></div>
+                <div class="menu" id="shape_area"></div>
+                <div class="menu" id="line_size_area">
+                    <input type="range" id="line_size_selector" min="0.1" max="5.0" value="2.5" step="0.1">
+                    <label>선 크기</label>
+                </div>
+                <div class="menu" id="color_area">
+                    <div id="color1_area">
+                        <div class="user_colors" id="user_color" style="background-color:rgb(0, 0, 0);"></div>
+                        <div>사용자 색상</div>
+                    </div>
+                    <div class="palette">
+                        <div class="palette_top" id="top">
+                            <div class="colors" style="background-color:rgb(0, 0, 0);"></div>
+                            <div class="colors" style="background-color:rgb(127, 127, 127);"></div>
+                            <div class="colors" style="background-color:rgb(136, 0, 21);"></div>
+                            <div class="colors" style="background-color:rgb(237, 28, 36);"></div>
+                            <div class="colors" style="background-color:rgb(255, 127, 39);"></div>
+                            <div class="colors" style="background-color:rgb(255, 242, 0);"></div>
+                            <div class="colors" style="background-color:rgb(24, 177, 76);"></div>
+                            <div class="colors" style="background-color:rgb(0, 162, 232);"></div>
+                            <div class="colors" style="background-color:rgb(63, 72, 203);"></div>
+                            <div class="colors" style="background-color:rgb(163, 73, 164);"></div>
+                        </div>
+                        <div class="palette_middle" id="middle">
+                            <div class="colors" style="background-color:rgb(255, 255, 255);"></div>
+                            <div class="colors" style="background-color:rgb(195, 195, 195);"></div>
+                            <div class="colors" style="background-color:rgb(182, 122, 87);"></div>
+                            <div class="colors" style="background-color:rgb(255, 174, 201);"></div>
+                            <div class="colors" style="background-color:rgb(255, 201, 14);"></div>
+                            <div class="colors" style="background-color:rgb(239, 228, 176);"></div>
+                            <div class="colors" style="background-color:rgb(181, 230, 29);"></div>
+                            <div class="colors" style="background-color:rgb(153, 217, 234);"></div>
+                            <div class="colors" style="background-color:rgb(112, 146, 190);"></div>
+                            <div class="colors" style="background-color:rgb(200, 191, 131);"></div>
+                        </div>
+                        <div class="palette_bottom" id="bottom">
+                            <div class="colors" style="background-color:rgb(175, 146, 255);"></div>
+                            <div class="colors" style="background-color:rgb(123, 255, 184);"></div>
+                            <div class="colors" style="background-color:rgb(222, 168, 162);"></div>
+                            <div class="colors" style="background-color:rgb(255, 255, 174);"></div>
+                            <div class="colors" style="background-color:rgb(255, 49, 150);"></div>
+                            <div class="colors" style="background-color:rgb(185, 200, 174);"></div>
+                            <div class="colors" style="background-color:rgb(163, 221, 223);"></div>
+                            <div class="colors" style="background-color:rgb(184, 163, 185);"></div>
+                            <div class="colors" style="background-color:rgb(123, 10, 255);"></div>
+                            <div class="colors" style="background-color:rgb(174, 100, 0);"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu" id="text_area">
+                    font size : <input type="number" id="fontSize" min='5' max='25' step='1' value='10'><br>
+                    Text : <input type="text" id="textContent">
+                    <input type="image" id="text" src="./image/text.png" onmousedown="this.src='./image/text_selected.png'" onmouseup="this.src='./image/text.png'" width="30" height="30">
+                </div>
+            </div>
+        </header>
+
+        <navigation></navigation>
+
+        <section>
+            <div id="content_area">
+                <canvas id="canvas_view" class="canvas"></canvas>
+            </div>
+        </section>
+        <footer></footer>
+        <script src="./js/DrawingEnum.js"></script>
+        <script src="./js/Color.js"></script>
+        <script src="./js/SketchBook.js"></script>
+        <script src="./js/app.js"></script>
+    </body>
+</html>
